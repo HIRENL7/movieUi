@@ -2,11 +2,11 @@
 
 import Cast from "@/components/Cast";
 import Featured from "@/components/Featured";
+import Herosection from "@/components/Herosection";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import Swiper from "swiper";
-import { SwiperSlide } from "swiper/react";
-
+import 'swiper/css';
+import 'swiper/css/pagination';
 export default function Home() {
   const [movies, setMovies] = useState<any[]>([]);
 
@@ -23,20 +23,26 @@ export default function Home() {
         };
         const response = await fetch('https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1', options);
         const data = await response.json();
-        setMovies(data.results); // Assuming 'results' contains the list of movies
+        setMovies(data.results);
       } catch (error) {
         console.error(error);
       }
     };
 
     fetchMovies();
-  }, []); // Empty dependency array to only run the effect once on component mount
+  }, []);
   console.log(movies);
 
   return (
-    <div className="flex flex-col items-between justify-between pt-24 pl-10 pr-10">
-      <Featured />
-      <Cast />
+    <div className="">
+      <Herosection />
+
+      <div className="flex flex-col items-between justify-between pt-[50px] pl-10 pr-10">
+        <Featured />
+
+        <Cast />
+      </div>
+
     </div>
   );
 }

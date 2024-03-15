@@ -1,5 +1,9 @@
 "use client"
 import React from 'react'
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import { Autoplay, Pagination, } from 'swiper/modules';
 import { useState, useEffect } from 'react';
 import { Button, Card, Carousel, CarouselItem, Col, Container, Row } from 'react-bootstrap';
 const Herosection = () => {
@@ -16,8 +20,8 @@ const Herosection = () => {
         };
         const response = await fetch('https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1', options);
         const data = await response.json();
-        console.log(data.results.slice(1, 2));
-        setTredingMovies(data.results.slice(1, 2)); // Slice to get only the first four movies
+        console.log(data.results.slice(0, 6));
+        setTredingMovies(data.results);
       } catch (error) {
         console.error(error);
       }
@@ -27,17 +31,61 @@ const Herosection = () => {
   }, []);
 
   return (
-    <div className='h-[100vh]'>
-      <Row className='flex gap-10 w-full' xxl={12} xl={12} lg={12}>
+    <div className='h-[600px]'>
+      <Swiper
+        // direction={'vertical'}
+        pagination={{
+          clickable: true,
+        }}
+        autoplay={{
+          delay: 2500,
+          disableOnInteraction: false,
+        }}
+        // navigation={true}
+        modules={[Pagination,Autoplay]}
+        className="mySwiper"
+      >
         {tredingMovies?.map((movie, index) => {
           return <>
-            <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} className=' w-[100%] aspect-[3/2]'
-            />
+            <SwiperSlide key={index}>
+              <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} className=' w-[100%] h-[600px] object-cover' />
+              <Container className='absolute top-[158px] left-[98px] '>
+                <Card className='' style={{ width: '18rem' }}>
+                  <Card.Body>
+                    <Card.Title className='font-bold leading-[56px] text-white text-[48px]'>{movie.original_title}</Card.Title>
+                    <div className='flex justify-start gap-6 items-center'>
+                      <div className='flex  items-center pt-[10px]'>
+                        <Card.Img variant="top" src={`../assets/images/imdb.png`} />
+                        <p className='text-white pl-[20px]'>{movie.vote_average}</p>
+                      </div>
+                      <div className='flex  items-center pt-[10px]'>
+                        <Card.Img variant="top" src={`../assets/images/tomato.png`} />
+                        <p className='text-white pl-[15px]'>{movie.popularity}%</p>
+                      </div>
+                    </div>
+                    <div className='pt-[10px]'><Card.Text className='text-white'>{movie.overview.slice(0, 100)}...</Card.Text></div>
+
+                    <Button className='text-white mt-[10px] p-[6px] gap-[8px] w-[169px] h-[36px] rounded-md bg-red-600 flex items-center justify-start'>
+
+                      <Card.Img variant="top" src={`../assets/images/Play.png`} className='h-[20px] w-[20px]' />
+                      <p className='text-white pl-[8px] text-[13px] font-bold leading-[15px]'>WATCH TRAILER</p>
+                    </Button>
+
+
+                  </Card.Body>
+                </Card>
+              </Container>
+
+            </SwiperSlide >
+
           </>
         })}
-      </Row>
 
-    </div>
+
+      </Swiper>
+
+
+    </div >
   )
 }
 

@@ -26,3 +26,30 @@ body {
     text-wrap: balance;
   }
 }
+
+.swiper-button-next,
+.swiper-button-prev {
+
+  top: 45% !important;
+}
+
+.swiper-button-next:after {
+  color: #6B7280;
+  font-size: 18px !important;
+  background:white;
+  padding: 10px;
+  border-radius: 42px;
+  border: 1px solid white;
+  right: 20px;
+  margin-right: 36px;
+
+}
+
+.swiper-button-prev:after {
+  color: #6B7280;
+  font-size: 18px !important;
+  background:white;
+  padding: 10px;
+  border-radius: 42px;
+  border: 1px solid white;
+}

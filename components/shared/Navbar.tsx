@@ -14,11 +14,9 @@ const Navbar = () => {
                         <circle cx="8.03713" cy="8.11061" r="6.76271" stroke="#004B95" strokeWidth="2" />
                         <path d="M14.7998 14.8735L20.2744 20.0261" stroke="#004B95" strokeWidth="2" strokeLinecap="round" />
                     </svg>
-                    <input type='text' className='bg-transparent w-[525px] border outline-white rounded-lg text-sm text-white px-3 py-1 placeholder:What do you want to watch?   ' placeholder='Search' />
+                    <input type='text' className='bg-transparent lg:w-[525px] sm:w-[325px] border outline-white rounded-lg text-sm text-white px-4 py-2  ' placeholder='What do you want to watch?  ' />
                 </div>
                 <div className='flex items-center gap-8 relative'>
-
-
                     <div className='flex items-center gap-1 relative cursor-pointer'>
                         <div className='flex items-center gap-4' >
                             <p className='text-white'>Sign In</p>
